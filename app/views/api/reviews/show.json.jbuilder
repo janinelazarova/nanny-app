@@ -1,0 +1,1 @@
+json.partial! "review.json.jbuilder", review: @review
