@@ -10,7 +10,7 @@ class Api::NanniesSessionsController < ApplicationController
         Rails.application.credentials.fetch(:secret_key_base), # the secret key
         'HS256' # the encryption algorithm
       )
-      render json: {jwt: jwt, email: nanny.email, nanny_id: nanny.id}, status: :created
+      render json: {jwt: jwt, email: nanny.email, nanny_id: nanny.id, nannyname: nanny.first_name}, status: :created
       else
         render json: {}, status: :unauthorized
     end

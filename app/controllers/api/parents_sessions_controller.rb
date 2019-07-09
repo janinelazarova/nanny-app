@@ -10,7 +10,7 @@ class Api::ParentsSessionsController < ApplicationController
         Rails.application.credentials.fetch(:secret_key_base), # the secret key
         'HS256' # the encryption algorithm
       )
-      render json: {jwt: jwt, email: parent.email, parent_id: parent.id}, status: :created
+      render json: {jwt: jwt, email: parent.email, parent_id: parent.id, parentname: parent.first_name}, status: :created
       else
         render json: {}, status: :unauthorized
     end
