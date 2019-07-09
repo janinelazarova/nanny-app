@@ -1,5 +1,5 @@
 class Api::NanniesController < ApplicationController
-  before_action :authenticate_nanny, except: [:create]
+  # before_action :authenticate_nanny, except: [:create], [:index], [:show]
   
   def index
     @nannies = Nanny.all

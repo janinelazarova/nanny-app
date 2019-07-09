@@ -17,8 +17,12 @@ class Api::BookingsController < ApplicationController
       parent_id: current_parent.id,
       nanny_id: params[:nanny_id],
       hours: params[:hours],
-      start_time: params[:start_time]
+      start_date: params[:start_date],
+      start_time: params[:start_time],
+      end_time: params[:end_time],
+      notes: params[:notes]
     )
+    puts @booking.start_time
     if @booking.save
       render json: {message: 'Booking created successfully'}, status: :created
     else
@@ -36,7 +40,10 @@ class Api::BookingsController < ApplicationController
 
     @booking.nanny_id = params[:nanny_id] || @booking.nanny_id
     @booking.hours = params[:hours] || @booking.hours
+    @booking.start_date = params[:start_date] || @booking.start_date
     @booking.start_time = params[:start_time] || @booking.start_time
+    @booking.end_time = params[:end_time] || @booking.end_time
+    @booking.notes = params[:notes] || @booking.notes
    
     if @booking.save
       render 'show.json.jbuilder'
