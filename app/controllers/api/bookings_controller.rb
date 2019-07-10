@@ -1,5 +1,6 @@
 class Api::BookingsController < ApplicationController
   before_action :authenticate_parent
+  before_action :authenticate_nanny
   # before_action :set_nanny
 
   #this will go to parents_controller?
