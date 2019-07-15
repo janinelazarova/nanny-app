@@ -9,3 +9,7 @@ json.specialization nanny.specialization
 json.bio nanny.bio
 json.image_url nanny.image_url
 json.rate nanny.rate
+json.education nanny.education
+json.latitude nanny.latitude
+json.longitude nanny.longitude
+

@@ -1,5 +1,5 @@
 class Api::NanniesController < ApplicationController
-  # before_action :authenticate_nanny, except: [:create], [:index], [:show]
+   before_action :authenticate_nanny, except: [:create,:index,:show]
   
   def index
     @nannies = Nanny.all
@@ -8,6 +8,10 @@ class Api::NanniesController < ApplicationController
 
 
   def create
+    # PRINTS THE COORDINATES TO THE SERVER LOG!
+      coordinates = Geocoder.coordinates(params[:address])
+      p "===========================#{coordinates}" 
+
     @nanny = Nanny.new(
       email: params[:email],
       password: params[:password],
@@ -20,7 +24,10 @@ class Api::NanniesController < ApplicationController
       specialization: params[:specialization],
       bio: params[:bio],
       image_url: params[:image_url],
-      rate: params[:rate]
+      rate: params[:rate],
+      education: params[:education],
+      latitude: coordinates[0],
+      longitude: coordinates[1]
       )
     if @nanny.save
       render json: {message: 'Nanny created successfully'}, status: :created
@@ -47,6 +54,15 @@ class Api::NanniesController < ApplicationController
     @nanny.bio = params[:bio] || @nanny.bio
     @nanny.image_url = params[:image_url] || @nanny.image_url
     @nanny.rate = params[:rate] || @nanny.rate
+    @nanny.education = params[:education] || @nanny.education
+
+    # PRINTS THE COORDINATES TO THE SERVER LOG!
+        
+    coordinates = Geocoder.coordinates(params[:address])
+    p "===========================#{coordinates}" 
+
+    @nanny.latitude = coordinates[0] || @nanny.latitude
+    @nanny.longitude = coordinates[1] || @nanny.longitude
 
     if @nanny.save
       render 'show.json.jbuilder'

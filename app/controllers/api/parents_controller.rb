@@ -1,5 +1,5 @@
 class Api::ParentsController < ApplicationController
-   before_action :authenticate_parent, except: [:create]
+   # before_action :authenticate_parent, except: [:create]
 
 
   def create
@@ -20,9 +20,14 @@ class Api::ParentsController < ApplicationController
   end
 
   def show
+
     @parent = Parent.find(params[:id])
-    @bookings = @parent.bookings
-    render 'show.json.jbuilder'
+    if current_parent == @parent
+      @bookings = @parent.bookings
+      render 'show.json.jbuilder'
+    else
+      render json: {}, status: :unauthorized
+    end
   end
 
   def update
