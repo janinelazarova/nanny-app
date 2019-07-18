@@ -26,6 +26,9 @@ class Api::NanniesController < ApplicationController
       image_url: params[:image_url],
       rate: params[:rate],
       education: params[:education],
+      # latitude: nil,
+      # longitude: nil
+
       latitude: coordinates[0],
       longitude: coordinates[1]
       )
@@ -55,8 +58,10 @@ class Api::NanniesController < ApplicationController
     @nanny.image_url = params[:image_url] || @nanny.image_url
     @nanny.rate = params[:rate] || @nanny.rate
     @nanny.education = params[:education] || @nanny.education
+    # @nanny.latitude = @nanny.latitude
+    # @nanny.longitude = @nanny.longitude
 
-    # PRINTS THE COORDINATES TO THE SERVER LOG!
+
         
     coordinates = Geocoder.coordinates(params[:address])
     p "===========================#{coordinates}" 
